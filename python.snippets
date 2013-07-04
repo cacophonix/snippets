@@ -1,6 +1,16 @@
 snippet inint
 	map(int,raw_input().split())
 
+snippet Sieve
+	def primes(n):
+		pr = range(n)
+		for i in xrange(2,n):
+			if not pr[i]: continue
+			ii=i*i
+			if ii>n: break
+			pr[ii::i]=[0]*len(pr[ii::i])
+		return pr
+		return filter(None,pr)[1:]
 
 
 
