@@ -1,0 +1,236 @@
+# Read File Into Vector
+snippet readfile
+	std::vector<char> v;
+	if (FILE *${2:fp} = fopen(${1:"filename"}, "r")) {
+		char buf[1024];
+		while (size_t len = fread(buf, 1, sizeof(buf), $2))
+			v.insert(v.end(), buf, buf + len);
+		fclose($2);
+	}${3}
+# std::map
+snippet map
+	std::map<${1:key}, ${2:value}> map${3};
+# std::vector
+snippet vector
+	std::vector<${1:char}> v${2};
+# Namespace
+snippet ns
+	namespace ${1:`Filename('', 'my')`} {
+		${2}
+	} /* $1 */
+# Class
+snippet cl
+	class ${1:`Filename('$1_t', 'name')`} {
+	public:
+		$1 (${2:arguments});
+		virtual ~$1 ();
+
+	private:
+		${3:/* data */}
+	};
+snippet fori
+	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
+		${4:/* code */}
+	}
+
+snippet stl
+	#include <set>
+	#include <map>
+	#include <cmath>
+	#include <ctime>
+	#include <queue>
+	#include <stack>
+	#include <vector>
+	#include <string>
+	#include <cctype>
+	#include <cstdio>
+	#include <iomanip>
+	#include <sstream>
+	#include <cstdlib>
+	#include <cassert>
+	#include <climits>
+	#include <complex>
+	#include <numeric>
+	#include <valarray>
+	#include <iostream>
+	#include <string.h>
+	#include <algorithm>
+	using namespace std;
+	
+	typedef long long ll;
+	typedef vector<int> vi;
+	typedef vector<vi> vvi;
+	typedef vector<string> vs;
+	
+	#define inf 1061109567
+	#define pb push_back
+	#define mp make_pair
+	#define all(a) a.begin(),a.end()
+	#define mem(x,a) memset(x,a,sizeof(x))
+	#define rep(i,n) for(int i(0),_n(n);i<_n;++i)
+	#define repi(i,a,b) for(int i(a),_b(b);i<_b;++i)
+	#define repr(i,a,b) for(int i(a),_b(b);i>=_b;--i)
+	#define repe(it,c) for(__typeof((c).begin()) it=(c).begin();it!=(c).end();++it)
+	#define len(x) ((int)(x.size()))
+	
+	
+	
+	
+	
+	
+	${1}
+	
+	
+	int main(){
+		ios_base::sync_with_stdio(0);
+		
+		
+		
+	}
+
+snippet io
+	ios_base::sync_with_stdio(0)
+	
+snippet Fre
+	freopen("in", "r", stdin);
+
+snippet Fro
+	freopen("out", "w", stdout);
+
+snippet Pi
+	#define PI 3.14159265358979323846264338327950
+
+
+snippet Pd
+	cout.precision(10);
+	cout.setf(ios::fixed);
+
+snippet Tostr
+	string tostr(long long  a){if(a==0) return "0";string ret;for(long long  i=a; i>0; i=i/10) ret.push_back((i%10)+48);reverse(ret.begin(),ret.end());return ret;}
+
+snippet Toint
+	long long  toint(string s){long long  r=0;istringstream sin(s);sin>>r;return r;}
+
+snippet Uniq
+	#define uniq(c) (c).resize(unique(c.begin(),c.end())-(c).begin());
+
+snippet Split
+	vs split(string s, string x=" ") {vs res; rep(i,len(s)){string a; while(i<(int)s.size()&&x.find(s[i])==string::npos)a+=s[i++]; if(!a.empty())res.push_back((a));} return res;}
+
+
+snippet Clk
+	cout<<endl<<1.0*clock()/CLOCKS_PER_SEC;
+
+snippet Sieve
+	#define MAX 10000000
+	#define is_it(n) (flag[n>>6]&(1<<((n>>1)&31)))
+	#define set_it(n) (flag[n>>6]|=(1<<((n>>1)&31)))
+	int flag[MAX/64];
+	vi prime;
+	void sieve(){
+		unsigned i,j,k;
+		flag[0]|=0;
+		for(i=3;i<sqrt(MAX)+1;i+=2){
+			if(!is_it(i)){
+				for(j=i*i,k=i<<1;j<MAX;j+=k)set_it(j);
+			}
+		}
+		prime.pb(2);
+		for(i=3;i<MAX;i+=2){
+			if(!is_it(i)){
+				prime.pb(i);
+			}
+		}
+	}
+
+snippet Np
+	do{
+		
+	}while(next_permutation(all(${1})));
+
+snippet Dbg
+	#define DEBUG 1 
+	#if DEBUG && !ONLINE_JUDGE 
+		#define debug(args...) (Debugger()) , args
+		class Debugger { public: Debugger(const std::string& _separator = ", ") : first(true), separator(_separator){} template<typename ObjectType> Debugger& operator , (const ObjectType& v) { if(!first) std::cerr << separator; std::cerr << v; first = false; return *this; } ~Debugger() { std::cerr << endl;} private: bool first; std::string separator; }; template <typename T1, typename T2> inline std::ostream& operator << (std::ostream& os, const std::pair<T1, T2>& p) { return os << "(" << p.first << ", " << p.second << ")"; } template<typename T> inline std::ostream &operator << (std::ostream & os,const std::vector<T>& v) { bool first = true; os << "["; for(unsigned int i = 0; i < v.size(); i++) { if(!first) os << ", "; os << v[i]; first = false; } return os << "]"; } template<typename T> inline std::ostream &operator << (std::ostream & os,const std::set<T>& v) { bool first = true; os << "["; for (typename std::set<T>::const_iterator ii = v.begin(); ii != v.end(); ++ii) { if(!first) os << ", "; os << *ii; first = false; } return os << "]"; } template<typename T1, typename T2> inline std::ostream &operator << (std::ostream & os,const std::map<T1, T2>& v) { bool first = true; os << "["; for (typename std::map<T1, T2>::const_iterator ii = v.begin(); ii != v.end(); ++ii) { if(!first) os << ", "; os << *ii ; first = false; } return os << "]"; } 
+	#else 
+			#define debug(args...) 
+	#endif
+
+
+
+snippet Tobin
+	string tobin(int n){
+		if(!n)return "";
+		if(n&1)return tobin(n/2)+"1";
+		else return tobin(n/2)+"0";
+	}
+
+snippet Pow
+	ll Pow(int b,int p){
+		ll ret=1;
+		rep(i,p){
+			ret*=b;
+		}
+		return ret;
+	}
+
+snippet Re
+	return 0;
+
+snippet Con
+	continue;
+
+snippet Tolo
+	void tolo(string &s){rep(i,len(s)){s[i]=tolower(s[i]);}}
+
+snippet Mod
+	const ll mod= 1000000007;
+
+snippet Typ
+	#define typ(c) __typeof((c).begin())
+
+snippet Stack
+	rlimit R;getrlimit(RLIMIT_STACK, &R);R.rlim_cur = R.rlim_max;setrlimit(RLIMIT_STACK, &R);
+
+snippet Bigmod
+	ll bigmod(ll b, ll p, ll m){
+		ll  r = 1;
+		while(p > 0){
+			if(p%2==1){
+				r=(r*b)%m;
+			}
+			p/=2;
+			b=(b*b)%m;
+		}
+		return r;
+	}
+
+snippet Bit
+	#define chk(a,k) ((bool)(a&(1LL<<(k))))
+	#define off(a,k) (a&(~(1LL<<(k))))
+	#define on(a,k) (a|(1LL<<(k)))
+
+snippet Fac
+	ll fac[1100];
+	void fact(){
+		fac[0]=1;
+		repi(i,1,1001){
+			fac[i]=(fac[i-1]*i)%mod;
+		}
+	}
+
+snippet Gmp
+	#include <gmpxx.h>
+	typedef mpz_class big;
+
+snippet Bitcnt
+	int bitcnt(int n){
+		int ret=0;
+		while(n){
+			if(n%2)ret++;
+			n/=2;
+		}
+		return ret;
+	}
+
